@@ -1,8 +1,15 @@
 import pandas as pd
+from bootstrap import *
 
-def harmonic_mean(dataframe):
-	
+# This should take as an argument the aggregated dataframe
+def harmonic_mean(filename):
+	aggregate_data = load_bootstrap_sample(filename)
+	aggregate_data = aggregate_data.sort_index()
+	counts = aggregate_data[0].values
+	# inverses = list(map(lambda i:1. / (i+1) * counts[i], range(len(counts))))
+	harmonic_mean = sum(counts) / sum(inverses)
 
+# The argument to this should be the dataframe of the raw bootstrapped data
 def trimean(dataframe):
 	descriptors = dataframe.describe()
 	q1 = data.describe()[0][4]
