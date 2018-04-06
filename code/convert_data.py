@@ -8,4 +8,4 @@ def aggregate_data(file_location):
 	data = pd.read_csv(file_location, header=None, names=cols)
 	data = data['rating']
 	aggregates = data.value_counts()
-	aggregates.to_csv('../amazon_data.csv', index=False)
+	aggregates.to_csv('../amazon_data.csv')
