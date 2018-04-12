@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from estimators import *
 
 def values_and_weights(filename):
 	cols = ['rating', 'count']
@@ -19,3 +20,18 @@ def load_bootstrap_sample(filename):
 	indices = np.flip(np.arange(1, len(data) + 1), axis=0)
 	data.index = indices
 	return data
+
+def bootstrap_estimator(size, n, values, weights=None, replace=True):
+	# repeat the sampling n times
+	trimeans = []
+	harmonic_means = []
+	for i in range(n):
+		print(i) 
+		sample = values.sample(n=size, replace=replace, weights=weights)
+		trimean_value = trimean(sample)
+		print(trimean_value)
+		trimeans.append(trimean_value)
+		harmonic_mean_value = harmonic_mean(sample.value_counts())
+		print(harmonic_mean_value)
+		harmonic_means.append(harmonic_mean_value)
+	return trimeans, harmonic_means
